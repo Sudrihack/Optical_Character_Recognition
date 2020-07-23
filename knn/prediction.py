@@ -4,11 +4,14 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn import neighbors
 import numpy as np
+from numpy import asarray
 import filextest
 import fileytest
 import filextrain 
 import fileytrain 
 import kfile
+import os
+from PIL import Image
 
 def lire_entrainement():
 	# xtest, ytest, xtrain, ytrain, k
@@ -35,6 +38,47 @@ def trouver_k_opti(xtrain, xtest, ytrain, ytest):
 	k_opti = klist[errors.index(min(errors))]
 	return k_opti
 
+def tester_image_bdd():
+	# On récupère les prédictions sur les données test
+	predicted = knn.predict(xtest)
+	print(predicted[0])
+	# On redimensionne les données sous forme d'images
+	images = xtest.reshape((-1, 28, 28))
+	# On selectionne un echantillon de 12 images au hasard
+	select = np.random.randint(images.shape[0], size=10)
+	print(images.shape[0])
+	# On affiche les images avec la prédiction associée
+	fig,ax = plt.subplots(3,4)
+
+	for index, value in enumerate(select):
+		plt.subplot(5,2,index+1)
+		plt.axis('off')
+		plt.imshow(images[value],cmap=plt.cm.gray_r,interpolation="nearest")
+		plt.title('Predicted: {}'.format( predicted[value]) )
+
+	plt.show()
+
+def tester_une_seule_image(img):
+	# On récupère les prédictions sur les données test
+	image = Image.open(img)
+	# On redimensionne les données sous forme d'images
+	images = xtest.reshape((-1, 28, 28))
+	# On selectionne un echantillon de 12 images au hasard
+	select = np.random.randint(images.shape[0], size=1)
+	# On affiche les images avec la prédiction associée
+	fig,ax = plt.subplots(1,1)
+	plt.axis('off')
+	plt.imshow(image,interpolation="nearest")
+
+	print("b :\n",b)
+	print("a :\n", a)
+	#predicted = knn.predict(a)
+	"""
+	for index, value in enumerate(select):
+		plt.title('Predicted: {}'.format( predicted[value]) ) #je dois avoir 7
+
+	plt.show()
+	"""
 xtest, ytest, xtrain, ytrain, k = lire_entrainement()
 
 
@@ -42,22 +86,7 @@ xtest, ytest, xtrain, ytrain, k = lire_entrainement()
 knn = neighbors.KNeighborsClassifier(k)
 knn.fit(xtrain, ytrain)
 
-# On récupère les prédictions sur les données test
 predicted = knn.predict(xtest)
-
-# On redimensionne les données sous forme d'images
 images = xtest.reshape((-1, 28, 28))
-
-# On selectionne un echantillon de 12 images au hasard
-select = np.random.randint(images.shape[0], size=40)
-
-# On affiche les images avec la prédiction associée
-fig,ax = plt.subplots(3,4)
-
-for index, value in enumerate(select):
-    plt.subplot(10,4,index+1)
-    plt.axis('off')
-    plt.imshow(images[value],cmap=plt.cm.gray_r,interpolation="nearest")
-    plt.title('Predicted: {}'.format( predicted[value]) )
-
-plt.show()
+#tester_image_bdd()
+tester_une_seule_image('3.jpg')	#ne fonctionne pas
