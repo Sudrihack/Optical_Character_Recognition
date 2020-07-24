@@ -39,6 +39,9 @@ def trouver_k_opti(xtrain, xtest, ytrain, ytest):
 	return k_opti
 
 def tester_image_bdd():
+
+	predicted = knn.predict(xtest)
+	images = xtest.reshape((-1, 28, 28))
 	# On récupère les prédictions sur les données test
 	predicted = knn.predict(xtest)
 	#print(predicted[0])
@@ -61,28 +64,44 @@ def tester_image_bdd():
 
 	plt.show()
 
-def tester_une_seule_image():
-	img = traiter_image('3.bmp')
+def tester_une_seule_image(nameimg, xtest, ytest, xtrain, ytrain, k):
+
+	xtest = xtest.tolist()
+	xtest.append(traiter_image(nameimg))
+
+
+	xtest = np.asarray(xtest)
+
+
+	# On récupère les prédictions sur les données test
 	predicted = knn.predict(xtest)
-	plt.imshow(img,cmap=plt.cm.gray_r,interpolation="nearest")
-	plt.axis('off')
+
+	# On redimensionne les données sous forme d'images
+	images = xtest.reshape((-1, 28, 28))
+
+	# On selectionne un echantillon de 12 images au hasard
+	select = np.random.randint(images.shape[0], size=5)
+
+	plt.imshow(images[-1], cmap=plt.cm.gray_r,interpolation="nearest")
+	plt.title('Predicted: {}'.format(predicted[-1]))
 	plt.show()
+
+	plt.show()
+
 
 def traiter_image(nameimg):
 	img = Image.open(nameimg)
 	tab = np.asarray(img).tolist()
-	Tf = []
+	T = []
 	for i in tab :
-		T = []
 		for j in i :
 			if j == True :
-				T.append(0.0)
+				T.append(50)
 			else :
-				T.append(255.0)
-		Tf.append(T)
-	Tf = np.asarray(Tf)
-	Tf.reshape((-1, 28, 28))
-	return Tf
+				T.append(600)
+	#Tf = np.asarray(Tf)
+	#Tf.reshape((-1, 28, 28))
+	return T
 
 
 def travail_img(img):
@@ -105,12 +124,7 @@ def travail_img(img):
 	
 
 xtest, ytest, xtrain, ytrain, k = lire_entrainement()
-
-
 # On récupère le classifieur le plus performant
 knn = neighbors.KNeighborsClassifier(k)
 knn.fit(xtrain, ytrain)
-
-predicted = knn.predict(xtest)
-images = xtest.reshape((-1, 28, 28))
-tester_image_bdd()
+tester_une_seule_image('6.bmp', xtest, ytest, xtrain, ytrain, k)
