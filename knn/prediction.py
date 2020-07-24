@@ -14,7 +14,6 @@ import os
 from PIL import Image
 
 def lire_entrainement():
-	# xtest, ytest, xtrain, ytrain, k
 	xtest, ytest, xtrain, ytrain, k = np.array(filextest.r()), np.array(fileytest.r()), np.array(filextrain.r()), np.array(fileytrain.r()), kfile.opti_k()
 	return xtest, ytest, xtrain, ytrain, k
 
@@ -42,23 +41,16 @@ def tester_image_bdd():
 
 	predicted = knn.predict(xtest)
 	images = xtest.reshape((-1, 28, 28))
-	# On récupère les prédictions sur les données test
 	predicted = knn.predict(xtest)
-	#print(predicted[0])
-	# On redimensionne les données sous forme d'images
 	images = xtest.reshape((-1, 28, 28))
-	# On selectionne un echantillon de 12 images au hasard
-	select = np.random.randint(images.shape[2], size=50)
-	#print(images.shape[0])
-	# On affiche les images avec la prédiction associée
-	fig,ax = plt.subplots(10,5)
-	#print(images[2])
+	select = np.random.randint(images.shape[2], size=20)
+	fig,ax = plt.subplots(5,4)
 	for index, value in enumerate(select):
 		try :
-			plt.subplot(10,5,index+1)
+			plt.subplot(5,4,index+1)
 			plt.axis('off')
 			plt.imshow(images[value],cmap=plt.cm.gray_r,interpolation="nearest")
-			plt.title('Predicted: {}'.format( predicted[value]) )
+			plt.title('Le chiffre est :{}'.format( predicted[value]) )
 		except :
 			...
 
@@ -68,22 +60,12 @@ def tester_une_seule_image(nameimg, xtest, ytest, xtrain, ytrain, k):
 
 	xtest = xtest.tolist()
 	xtest.append(traiter_image(nameimg))
-
-
 	xtest = np.asarray(xtest)
-
-
-	# On récupère les prédictions sur les données test
 	predicted = knn.predict(xtest)
-
-	# On redimensionne les données sous forme d'images
 	images = xtest.reshape((-1, 28, 28))
-
-	# On selectionne un echantillon de 12 images au hasard
 	select = np.random.randint(images.shape[0], size=5)
-
 	plt.imshow(images[-1], cmap=plt.cm.gray_r,interpolation="nearest")
-	plt.title('Predicted: {}'.format(predicted[-1]))
+	plt.title('le chiffre est :{}'.format(predicted[-1]))
 	plt.show()
 
 	plt.show()
@@ -99,8 +81,6 @@ def traiter_image(nameimg):
 				T.append(50)
 			else :
 				T.append(600)
-	#Tf = np.asarray(Tf)
-	#Tf.reshape((-1, 28, 28))
 	return T
 
 
@@ -122,9 +102,9 @@ def travail_img(img):
 	print(narr)
 	return narr
 	
-
-xtest, ytest, xtrain, ytrain, k = lire_entrainement()
-# On récupère le classifieur le plus performant
-knn = neighbors.KNeighborsClassifier(k)
-knn.fit(xtrain, ytrain)
-tester_une_seule_image('6.bmp', xtest, ytest, xtrain, ytrain, k)
+if __name__ == '__main__':
+	xtest, ytest, xtrain, ytrain, k = lire_entrainement()
+	knn = neighbors.KNeighborsClassifier(k)
+	knn.fit(xtrain, ytrain)
+	#tester_une_seule_image('6.bmp', xtest, ytest, xtrain, ytrain, k)
+	tester_image_bdd()

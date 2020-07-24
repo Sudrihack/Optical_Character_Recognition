@@ -1,8 +1,10 @@
 """
-ce script nous permet de choisir le k optimal pour notre knn
-et d'enregistrer dans des fichiers txt la phase d'entrainement
+STEPS :
+1) we take informations of bdd
+2) we take a part of the bdd
+3) we train the machine
+4) we record the training into another py files
 """
-
 from sklearn.datasets import fetch_openml
 import numpy as np
 import matplotlib.pyplot as plt
@@ -11,24 +13,15 @@ from sklearn import neighbors
 import os
 mnist = fetch_openml('mnist_784', version=1)
 
-# on évite d'avoir trop de données en en prennant 
-# qu'une partie au hasard pour gagner du temps
+# we take a part of the bdd to gain time to training
 sample = np.random.randint(70000, size=1000)
 data = mnist.data[sample]
 target = mnist.target[sample]
 
-# phase d'entrainement
+# training
 xtrain, xtest, ytrain, ytest = train_test_split(data, target, train_size=0.8)
 
-# test d'erreurs pour un seul k
-"""
-knn = neighbors.KNeighborsClassifier(n_neighbors=3)
-knn.fit(xtrain, ytrain)
-error = 1 - knn.score(xtest, ytest)
-"""
-#print('Erreur: %f' % error)
-
-# pour afficher un graphique pour avoir le meilleur k possible
+# to find the best k
 errors = []
 klist = []
 for k in range(2,15):
@@ -40,10 +33,6 @@ for k in range(2,15):
 	klist.append(k)
 k_opti = klist[errors.index(min(errors))]
 print("k opti : ", k_opti)
-
-# on affiche sur un graphique les erreurs
-# plt.plot(range(2,15), errors, 'o-')
-# plt.show()
 
 print("longueur xtrain", len(xtrain))
 

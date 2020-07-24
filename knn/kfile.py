@@ -1,2 +1,2 @@
 def opti_k():
-	return 7
+	return 5
