@@ -65,6 +65,7 @@ def tester_une_seule_image(nameimg, xtest, ytest, xtrain, ytrain, k):
 	images = xtest.reshape((-1, 28, 28))
 	select = np.random.randint(images.shape[0], size=5)
 	plt.imshow(images[-1], cmap=plt.cm.gray_r,interpolation="nearest")
+	plt.axis('off')
 	plt.title('le chiffre est :{}'.format(predicted[-1]))
 	plt.show()
 
@@ -106,5 +107,5 @@ if __name__ == '__main__':
 	xtest, ytest, xtrain, ytrain, k = lire_entrainement()
 	knn = neighbors.KNeighborsClassifier(k)
 	knn.fit(xtrain, ytrain)
-	#tester_une_seule_image('6.bmp', xtest, ytest, xtrain, ytrain, k)
-	tester_image_bdd()
+	tester_une_seule_image('6.bmp', xtest, ytest, xtrain, ytrain, k)
+	#tester_image_bdd()
