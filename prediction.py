@@ -107,5 +107,5 @@ if __name__ == '__main__':
 	xtest, ytest, xtrain, ytrain, k = lire_entrainement()
 	knn = neighbors.KNeighborsClassifier(k)
 	knn.fit(xtrain, ytrain)
-	tester_une_seule_image('6.bmp', xtest, ytest, xtrain, ytrain, k)
+	tester_une_seule_image('2_3_sep_1.bmp', xtest, ytest, xtrain, ytrain, k)
 	#tester_image_bdd()
