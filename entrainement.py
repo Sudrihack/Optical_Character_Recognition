@@ -14,7 +14,7 @@ import os
 mnist = fetch_openml('mnist_784', version=1)
 
 # we take a part of the bdd to gain time to training
-sample = np.random.randint(70000, size=1000)
+sample = np.random.randint(70000, size=10000)
 data = mnist.data[sample]
 target = mnist.target[sample]
 
@@ -24,7 +24,7 @@ xtrain, xtest, ytrain, ytest = train_test_split(data, target, train_size=0.8)
 # to find the best k
 errors = []
 klist = []
-for k in range(2,15):
+for k in range(2,23):
 	print('on analyse', k, end=" ")
 	knn = neighbors.KNeighborsClassifier(k)
 	print('#', end="")

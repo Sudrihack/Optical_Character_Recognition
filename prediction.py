@@ -12,6 +12,7 @@ import fileytrain
 import kfile
 import os
 from PIL import Image
+import sys
 
 def lire_entrainement():
 	xtest, ytest, xtrain, ytrain, k = np.array(filextest.r()), np.array(fileytest.r()), np.array(filextrain.r()), np.array(fileytrain.r()), kfile.opti_k()
@@ -56,7 +57,7 @@ def tester_image_bdd():
 
 	plt.show()
 
-def tester_une_seule_image(nameimg, xtest, ytest, xtrain, ytrain, k):
+def tester_une_seule_image(nameimg, xtest, ytest, xtrain, ytrain, k, afficher):
 
 	xtest = xtest.tolist()
 	xtest.append(traiter_image(nameimg))
@@ -64,12 +65,16 @@ def tester_une_seule_image(nameimg, xtest, ytest, xtrain, ytrain, k):
 	predicted = knn.predict(xtest)
 	images = xtest.reshape((-1, 28, 28))
 	select = np.random.randint(images.shape[0], size=5)
-	plt.imshow(images[-1], cmap=plt.cm.gray_r,interpolation="nearest")
-	plt.axis('off')
-	plt.title('le chiffre est :{}'.format(predicted[-1]))
-	plt.show()
+	if afficher == True :
+		plt.imshow(images[-1], cmap=plt.cm.gray_r,interpolation="nearest")
+		plt.axis('off')
+		plt.title('le chiffre est :{}'.format(predicted[-1]))
+		plt.show()
 
-	plt.show()
+		plt.show()
+		return predicted[-1]
+	else :
+		return predicted[-1]
 
 
 def traiter_image(nameimg):
@@ -79,9 +84,9 @@ def traiter_image(nameimg):
 	for i in tab :
 		for j in i :
 			if j == True :
-				T.append(50)
+				T.append(0)
 			else :
-				T.append(600)
+				T.append(255)
 	return T
 
 
@@ -103,9 +108,10 @@ def travail_img(img):
 	print(narr)
 	return narr
 	
+xtest, ytest, xtrain, ytrain, k = lire_entrainement()
+knn = neighbors.KNeighborsClassifier(k)
+knn.fit(xtrain, ytrain)
 if __name__ == '__main__':
-	xtest, ytest, xtrain, ytrain, k = lire_entrainement()
-	knn = neighbors.KNeighborsClassifier(k)
-	knn.fit(xtrain, ytrain)
-	tester_une_seule_image('2_3_sep_1.bmp', xtest, ytest, xtrain, ytrain, k)
+	filename = sys.argv[1]
+	print(tester_une_seule_image(filename, xtest, ytest, xtrain, ytrain, k, False))
 	#tester_image_bdd()
