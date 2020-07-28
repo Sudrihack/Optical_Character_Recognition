@@ -74,6 +74,7 @@ def tester_une_seule_image(nameimg, xtest, ytest, xtrain, ytrain, k, afficher):
 		plt.show()
 		return predicted[-1]
 	else :
+		print(predicted)
 		return predicted[-1]
 
 

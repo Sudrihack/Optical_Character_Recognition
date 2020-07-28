@@ -40,13 +40,13 @@ def ajouter_ligne(lignepx, lettre, texte, a, filename):
                     a+=1
             while [] in lettre :
             	lettre[lettre.index([])] = [255] * len(lettre[0])
-            cv2.imwrite(filename[0:-4] + "/"+str(a)+".bmp", np.asarray(lettre, np.uint16))
+            cv2.imwrite(filename[0:-4] + "/"+str(a)+".bmp", np.asarray(lettre))
             lettre = lettre_vierge(height)
     return texte, lettre
 
-def remettre_true_false(T):
+def remettre_true_false(tableau):
 	T = []
-	for i in T : 
+	for i in tableau : 
 		T_temp = []
 		for j in i :
 			if j == True | j == False :
@@ -55,6 +55,7 @@ def remettre_true_false(T):
 				T_temp.append(True)
 			elif j == 0:
 				T_temp.append(False)
+		T.append(T_temp)
 	return T
 def ajouter_debut(liste, element):
     T = []
