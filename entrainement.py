@@ -14,7 +14,7 @@ import os
 mnist = fetch_openml('mnist_784', version=1)
 
 # we take a part of the bdd to gain time to training
-sample = np.random.randint(70000, size=10000)
+sample = np.random.randint(70000, size=5000)
 data = mnist.data[sample]
 target = mnist.target[sample]
 

@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 import sys
-
+import binarize
 def traiter_image(nameimg):
     #img = Image.open(nameimg)
     tab = np.asarray(nameimg).tolist()
@@ -41,22 +41,11 @@ def ajouter_ligne(lignepx, lettre, texte, a, filename):
             while [] in lettre :
             	lettre[lettre.index([])] = [255] * len(lettre[0])
             cv2.imwrite(filename[0:-4] + "/"+str(a)+".bmp", np.asarray(lettre))
+            #binarize.binarize(filename[0:-4] + "/"+str(a)+".bmp")
             lettre = lettre_vierge(height)
     return texte, lettre
 
-def remettre_true_false(tableau):
-	T = []
-	for i in tableau : 
-		T_temp = []
-		for j in i :
-			if j == True | j == False :
-				T_temp.append(j)
-			elif j == 255 :
-				T_temp.append(True)
-			elif j == 0:
-				T_temp.append(False)
-		T.append(T_temp)
-	return T
+
 def ajouter_debut(liste, element):
     T = []
     T.append(element)

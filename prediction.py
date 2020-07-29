@@ -74,7 +74,7 @@ def tester_une_seule_image(nameimg, xtest, ytest, xtrain, ytrain, k, afficher):
 		plt.show()
 		return predicted[-1]
 	else :
-		print(predicted)
+		#print(predicted)
 		return predicted[-1]
 
 
@@ -95,7 +95,7 @@ def travail_img(img):
 	image = Image.open(img)
 	image.show()
 	arr = np.asarray(image).tolist()
-	print(arr)
+	#print(arr)
 	
 	narr = []
 	for i in arr :
@@ -106,7 +106,7 @@ def travail_img(img):
 			else :
 				T.append(0)
 		narr.append(T)
-	print(narr)
+	#print(narr)
 	return narr
 	
 xtest, ytest, xtrain, ytrain, k = lire_entrainement()
