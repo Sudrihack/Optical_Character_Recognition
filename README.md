@@ -5,21 +5,28 @@ OCR = Optical Character Recognition
 
 You will install sklearn, numpy, matplotlib, PIL to use this script
 so :
-<code>
-	python -m pip install sklearn
-</code>
-
-<code>
-	python -m pip install numpy
-</code>
-
-<code>
-	python -m pip install matplotlib
-</code>
-
-<code>
-	python -m pip install pillow
-</code>
+<ul>
+	<li>
+		<code>
+			python -m pip install sklearn
+		</code>
+	</li>
+	<li>
+		<code>
+			python -m pip install numpy
+		</code>
+	</li>
+	<li>
+		<code>
+			python -m pip install matplotlib
+		</code>
+	</li>
+	<li>
+		<code>
+			python -m pip install pillow
+		</code>
+	</li>
+</ul>
 
 # How to use 
 
