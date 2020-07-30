@@ -18,7 +18,7 @@ def lire_entrainement():
 	xtest, ytest, xtrain, ytrain, k = np.array(filextest.r()), np.array(fileytest.r()), np.array(filextrain.r()), np.array(fileytrain.r()), kfile.opti_k()
 	return xtest, ytest, xtrain, ytrain, k
 
-def reentrainement_provisoir() :
+def reentrainement_provisoire() :
 	mnist = fetch_openml('mnist_784', version=1)
 
 	sample = np.random.randint(70000, size=1000)

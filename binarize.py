@@ -10,9 +10,9 @@ def printArray(T):
 		print(i)
 
 
-def binarize(image):
+def binarize(nameImage):
 
-	image = Image.open(image)
+	image = Image.open(nameImage)
 	T = np.asarray(image).tolist()
 
 	newT = []
@@ -29,14 +29,13 @@ def binarize(image):
 			newT.append(Ttmp)
 
 		except :
-			print("'j")
 			return 
-	printArray(newT)
+	#printArray(newT)
 
-	image = Image.fromarray(np.asarray(newT))
-	image.save(image)
+	data = Image.fromarray(np.asarray(newT).astype(np.bool))
+	data.save(nameImage)
 
 if __name__ == '__main__':
 	image = Image.open(sys.argv[1])
 	printArray(np.asarray(image).tolist())
-	binarize(sys.argv[1])
+	#binarize(sys.argv[1])
