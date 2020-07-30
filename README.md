@@ -7,8 +7,14 @@ You will install sklearn, numpy, matplotlib, PIL to use this script
 so :
 <code>
 	python -m pip install sklearn
+</code>
+<code>
 	python -m pip install numpy
+</code>
+<code>
 	python -m pip install matplotlib
+</code>
+<code>
 	python -m pip install pillow
 </code>
 
@@ -21,13 +27,17 @@ if you have a suite of numbers, with height 28 pixels, in any format, you can us
 # Prediction
 
 there are 2 functions into prediction.py to analyze images.
-	* tester_image_bdd() => to analyse images stock in the mnist_784 database
-	* tester_une_seule_image() => to analyse a specific image outside of the database 
- in this two functions you can display the result in matplotlib window or just return the final result
+<ol>
+	<li>tester_image_bdd() => to analyse images stock in the mnist_784 database</li>
+	<li>tester_une_seule_image() => to analyse a specific image outside of the database</li>
+<ol>
+in this two functions you can display the result in matplotlib window or just return the final result
 
 Warning :
-	* for now, this script can only analyze (28*28)px images, in bitmap format (1 bits).
-	* only number are predicted
+<ol>
+	<li>for now, this script can only analyze (28*28)px images, in bitmap format (1 bits).</li>
+	<li>only number are predicted</li>
+</ol>
 
 # Training
 
