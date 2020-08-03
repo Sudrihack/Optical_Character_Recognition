@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np 
 import sys 
 import cv2
-
+import os
 def printArray(T):
 	print("elements dans ce tableau", len(T))
 	print("elements par lignes", len(T[0]))

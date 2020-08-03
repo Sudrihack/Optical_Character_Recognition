@@ -1,4 +1,4 @@
-import decoupage_image
+import contours
 import prediction 
 import sys
 import os
@@ -15,13 +15,14 @@ def lire_entrainement():
 
 if __name__ == '__main__':
 	filename = sys.argv[1]
-	etat = decoupage_image.main(filename)
+	etat = contours.main(filename)
 	if etat == True :
-		liste_img = os.listdir(filename[0:-4])
+		liste_img = os.listdir("separations/" + filename[0:-4])
 		predict = ''
 		xtest, ytest, xtrain, ytrain, k = lire_entrainement()
 		for i in liste_img :
-			predict += prediction.tester_une_seule_image(filename[0:-4]+"/"+i, xtest, ytest, xtrain, ytrain, k, False)
+			print("separations/"+filename[0:-4]+"/"+i)
+			predict += prediction.tester_une_seule_image("separations/"+filename[0:-4]+"/"+i, xtest, ytest, xtrain, ytrain, k, False)
 			#predict = prediction.tester_une_seule_image(filename, xtest, ytest, xtrain, ytrain, k, False)
 		print(predict)
 	else :
