@@ -21,7 +21,6 @@ if __name__ == '__main__':
 		predict = ''
 		xtest, ytest, xtrain, ytrain, k = lire_entrainement()
 		for i in liste_img :
-			print("separations/"+filename[0:-4]+"/"+i)
 			predict += prediction.tester_une_seule_image("separations/"+filename[0:-4]+"/"+i, xtest, ytest, xtrain, ytrain, k, False)
 			#predict = prediction.tester_une_seule_image(filename, xtest, ytest, xtrain, ytrain, k, False)
 		print(predict)

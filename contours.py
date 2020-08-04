@@ -4,6 +4,8 @@ import os
 import sys
 from PIL import Image 
 import decoupage_image as crop
+import resize
+import binarize
 
 def main(image):
     filename = ''
@@ -85,9 +87,12 @@ def bonne_taille(filename):
     for i in os.listdir(repo):
         if i not in a_conserver:
             try :
-                os.system('rm '+repo+"/"+i)
+                os.remove(repo+"/"+i)
             except :
                 ...
+        else : 
+            resize.main(repo + '/' + i)
+            #binarize.binarize(repo + '/' + i)
 
 if __name__ == '__main__':
     main(sys.argv[1])

@@ -30,7 +30,6 @@ def binarize(nameImage):
 
 		except :
 			return 
-	#printArray(newT)
 
 	data = Image.fromarray(np.asarray(newT).astype(np.bool))
 	data.save(nameImage)
