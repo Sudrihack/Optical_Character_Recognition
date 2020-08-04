@@ -12,7 +12,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import neighbors
 import os
 import sys
-def main(s = 60000, kmax = 30):
+def main(s = 10000, kmax = 20):
 	mnist = fetch_openml('mnist_784', version=1)
 
 	# we take a part of the bdd to gain time to training

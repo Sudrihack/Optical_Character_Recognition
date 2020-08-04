@@ -52,7 +52,7 @@ def ajouter_ligne(lignepx, lettre, texte, a, filename, a_conserver):
 
             cv2.imwrite(name+str(a)+".bmp", np.asarray(lettre))
             a_conserver.append(str(a)+".bmp")
-            binarize.binarize(filename)
+            #binarize.binarize(filename)
             lettre = lettre_vierge(height)
 
     return texte, lettre

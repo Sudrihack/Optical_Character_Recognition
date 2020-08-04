@@ -5,7 +5,7 @@ import sys
 from PIL import Image 
 import decoupage_image as crop
 import resize
-import binarize
+import binarize as bw
 
 def main(image):
     filename = ''
@@ -91,8 +91,8 @@ def bonne_taille(filename):
             except :
                 ...
         else : 
-            resize.main(repo + '/' + i)
-            #binarize.binarize(repo + '/' + i)
+            resize.main(repo + i)
+            bw.binarize(repo + i)
 
 if __name__ == '__main__':
     main(sys.argv[1])

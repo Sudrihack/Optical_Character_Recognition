@@ -12,6 +12,8 @@ def printArray(T):
 
 def binarize(nameImage):
 
+	print(nameImage)
+
 	image = Image.open(nameImage)
 	T = np.asarray(image).tolist()
 
@@ -22,7 +24,7 @@ def binarize(nameImage):
 			for j in i :
 				if j == True or j == False:				
 					Ttmp.append(j)
-				elif j == 255 :
+				elif j > 0 :
 					Ttmp.append(True)
 				elif j == 0 :
 					Ttmp.append(False)
@@ -30,11 +32,12 @@ def binarize(nameImage):
 
 		except :
 			return 
-
+	#printArray(newT)
 	data = Image.fromarray(np.asarray(newT).astype(np.bool))
+	#data.show()
 	data.save(nameImage)
 
 if __name__ == '__main__':
 	image = Image.open(sys.argv[1])
 	printArray(np.asarray(image).tolist())
-	#binarize(sys.argv[1])
+	binarize(sys.argv[1])
