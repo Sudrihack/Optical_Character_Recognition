@@ -12,7 +12,19 @@ from sklearn.model_selection import train_test_split
 from sklearn import neighbors
 import os
 import sys
-def main(s = 10000, kmax = 20):
+
+# to download mnist_784 if we have proxy server
+
+"""
+proxy = "proxy:port"
+
+os.environ['http_proxy'] = proxy 
+os.environ['HTTP_PROXY'] = proxy
+os.environ['https_proxy'] = proxy
+os.environ['HTTPS_PROXY'] = proxy
+"""
+
+def main(s = 1000, kmax = 20):
 	mnist = fetch_openml('mnist_784', version=1)
 
 	# we take a part of the bdd to gain time to training
