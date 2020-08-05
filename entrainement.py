@@ -24,7 +24,7 @@ os.environ['https_proxy'] = proxy
 os.environ['HTTPS_PROXY'] = proxy
 """
 
-def main(s = 1000, kmax = 20):
+def main(s = 12800, kmax = 20):
 	mnist = fetch_openml('mnist_784', version=1)
 
 	# we take a part of the bdd to gain time to training
@@ -46,7 +46,7 @@ def main(s = 1000, kmax = 20):
 		print('#')
 		klist.append(k)
 	k_opti = klist[errors.index(min(errors))]
-	print("k opti : ", k_opti)
+	print("k opti : ", k_opti, "avec une erreur de", min(errors), "%")
 
 	print("longueur xtrain", len(xtrain))
 

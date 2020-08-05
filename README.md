@@ -5,6 +5,7 @@ OCR = Optical Character Recognition
 
 You will install sklearn, numpy, matplotlib, PIL to use this script
 so :
+<center>
 <ul>
 	<li>
 		<code>
@@ -27,12 +28,14 @@ so :
 		</code>
 	</li>
 </ul>
+</center>
 
 # How to use 
 
+if you have a suite of numbers, with height 28 pixels, in any format, you can use "python index.py yourimage".
+
 if your image are only one number (like 1, 2, 3, ..., 9) in (28*28) pixels and in .bixmap format (1 bit) you can use the command : "python prediction.py yourimage"
 
-if you have a suite of numbers, with height 28 pixels, in any format, you can use "python index.py yourimage"
 
 # Prediction
 

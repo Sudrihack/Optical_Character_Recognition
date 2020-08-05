@@ -13,15 +13,30 @@ def main(image):
         if i == '.':
             break
         filename+=i
+    #filename = image
+
+    try : 
+        os.listdir("separations/")
+    except :
+        os.system("mkdir separations/")
 
     try : 
         os.listdir("separations/"+filename)
     except :
         os.system("mkdir separations/"+filename)
-
+    
     image = cv2.imread(image)
     width = image.shape[0]
     height = image.shape[1]
+    """
+    if width > 28 :
+        coeff = 16
+        newheight = int(height / coeff)
+        newwidth = int(width)
+        output = cv2.resize(image, (newwidth, newheight))
+        cv2.imwrite('separations/'+filename+"/resize.png", output)
+        image = cv2.imread('separations/'+filename+"/resize.png")
+    """
     b = image
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     ret,thresh = cv2.threshold(gray,250,255,cv2.THRESH_BINARY_INV)
@@ -35,8 +50,11 @@ def main(image):
         
         M = cv2.moments(cnt)
         #print(M)
-        cX = int(M["m10"] / M["m00"])
-        cY = int(M["m01"] / M["m00"])
+        try :
+            cX = int(M["m10"] / M["m00"])
+            cY = int(M["m01"] / M["m00"])
+        except :
+            cX, cY = 0, 0
         blank_image = np.zeros((width,height,3), np.uint8)
         blank_image[0::] = (255)      # (B, G, R)
         #print(cnt.tolist())
@@ -49,7 +67,7 @@ def main(image):
                 newcnt.append(newcnt_temp)
                 newcnt_temp = []
         newcnt = np.asarray(newcnt)
-        a = cv2.drawContours(blank_image,[newcnt],-1,(0),1)
+        a = cv2.drawContours(blank_image,[newcnt],-1,(0),2)
         T = []
         for ligne in a :
             T_temp = []
@@ -77,7 +95,7 @@ def main(image):
     bonne_taille(filename)
     return True
 
-
+    
 def bonne_taille(filename):
     repo = "separations/"+filename+"/"
     liste_images = os.listdir(repo)
