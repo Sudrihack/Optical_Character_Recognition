@@ -24,7 +24,7 @@ os.environ['https_proxy'] = proxy
 os.environ['HTTPS_PROXY'] = proxy
 """
 
-def main(s = 12800, kmax = 20):
+def main(s = 5000, kmax = 15):
 	mnist = fetch_openml('mnist_784', version=1)
 
 	# we take a part of the bdd to gain time to training
@@ -34,21 +34,18 @@ def main(s = 12800, kmax = 20):
 
 	# training
 	xtrain, xtest, ytrain, ytest = train_test_split(data, target, train_size=0.8)
-
 	# to find the best k
 	errors = []
 	klist = []
 	for k in range(2,kmax):
-		print('on analyse', k, end=" ")
+		print('\ton analyse', k)
 		knn = neighbors.KNeighborsClassifier(k)
-		print('#', end="")
+		#print('#', end="")
 		errors.append(100*(1 - knn.fit(xtrain, ytrain).score(xtest, ytest)))
-		print('#')
+		#print('#')
 		klist.append(k)
 	k_opti = klist[errors.index(min(errors))]
-	print("k opti : ", k_opti, "avec une erreur de", min(errors), "%")
-
-	print("longueur xtrain", len(xtrain))
+	print("\tk opti : ", k_opti, "avec une erreur de", min(errors), "%")
 
 	# on enregistre la phase d'entrainement
 	filextrain = open("filextrain.py", "w")
@@ -70,6 +67,8 @@ def main(s = 12800, kmax = 20):
 	kfile = open("kfile.py", 'w')
 	kfile.write("def opti_k():\n\treturn "+str(k_opti))
 	kfile.close()
+
+	return k_opti, min(errors)
 
 if __name__ == '__main__':
 	main()
